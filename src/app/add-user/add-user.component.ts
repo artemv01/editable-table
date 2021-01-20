@@ -42,6 +42,16 @@ export class AddUserComponent implements OnInit {
     userData.id = getID();
     this.dialogRef.close(userData);
   }
+  onCountryChange(event) {
+    this.selectedCountry = event;
+    this.userForm
+      .get('phone')
+      .setValidators([
+        Validators.required,
+        validatePhone(this.selectedCountry),
+      ]);
+    this.userForm.get('phone').updateValueAndValidity();
+  }
 
   ngOnInit(): void {}
 }

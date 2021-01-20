@@ -22,6 +22,8 @@
     <div class="phone-wrap">
       <div class="country-flag">
         <select [(ngModel)]="selectedCountry"
+          #countryControl=ngModel
+          (change)="onCountryChange(countryControl.value)"
           [ngModelOptions]="{standalone: true}">
           <option *ngFor="let country of countries"
             [value]="country.code">{{country.code}}&nbsp;&nbsp;{{country.emoji}}</option>

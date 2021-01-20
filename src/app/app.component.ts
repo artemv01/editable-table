@@ -19,7 +19,7 @@ type EditControls = Record<string, Record<string, FormControl>>;
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements AfterViewInit {
-  title = 'users-test';
+  title = 'editable-table';
   displayedColumns = ['name', 'email', 'phone', 'actions'];
   users: Record<string, User> = USERS;
   _users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(
@@ -151,6 +151,12 @@ export class AppComponent implements AfterViewInit {
 
   onCountryChangeClick(id: string, control: FormControl) {
     this.users[id].countryCode = control.value;
+
+    this.editControls[id].phone.setValidators([
+      Validators.required,
+      validatePhone(control.value),
+    ]);
+    this.editControls[id].phone.updateValueAndValidity();
     this._users$.next(Object.values(this.users));
   }
 }

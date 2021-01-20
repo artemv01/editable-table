@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "users-test": {
+    "editable-table": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/users-test",
+            "outputPath": "dist/editable-table",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "users-test:build"
+            "browserTarget": "editable-table:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "users-test:build:production"
+              "browserTarget": "editable-table:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "users-test:build"
+            "browserTarget": "editable-table:build"
           }
         },
         "test": {
@@ -116,16 +116,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "users-test:serve"
+            "devServerTarget": "editable-table:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "users-test:serve:production"
+              "devServerTarget": "editable-table:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "users-test"
+  "defaultProject": "editable-table"
 }

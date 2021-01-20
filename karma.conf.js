@@ -19,7 +19,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/users-test'),
+      dir: require('path').join(__dirname, './coverage/editable-table'),
       subdir: '.',
       reporters: [
         { type: 'html' },
