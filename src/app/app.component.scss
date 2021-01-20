@@ -1,0 +1,57 @@
+table {
+  width: 100%;
+}
+button.add-user {
+  margin: 20px;
+}
+:host {
+  display: flex;
+  justify-content: center;
+}
+mat-card {
+  width: 1200px;
+  min-height: 800px;
+  padding: 16px 16px;
+  margin-top: 64px;
+}
+mat-icon {
+  cursor: pointer;
+}
+tr[mat-row] {
+  cursor: pointer;
+  height: 80px;
+}
+mat-form-field {
+  width: 100%;
+  padding-right: 22px;
+  box-sizing: border-box;
+}
+h1 {
+  padding: 0 16px;
+}
+
+.phone-wrap {
+  display: flex;
+  flex-flow: row nowrap;
+  select {
+    border: 0;
+    background: transparent;
+  }
+  select:focus {
+    outline: none;
+  }
+  .country-flag {
+    box-sizing: border-box;
+    width: 5rem;
+  }
+  .country-code {
+    width: 2rem;
+    display: flex;
+    padding-right: 8px;
+    justify-content: flex-end;
+    box-sizing: border-box;
+  }
+}
+mat-icon.mat-icon:not(:last-child) {
+  margin-right: 6px;
+}

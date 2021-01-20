@@ -1,0 +1,56 @@
+<h1>Add user</h1>
+<form action=""
+  (submit)="onSubmit()"
+  [formGroup]="userForm">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput
+      required
+      formControlName="name">
+    <mat-error *ngIf="userForm.controls['name'].invalid">Please enter a name</mat-error>
+
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput
+      required
+      formControlName="email">
+    <mat-error *ngIf="userForm.controls['email'].invalid">Please enter a valid email</mat-error>
+  </mat-form-field>
+  <mat-form-field class="phone-input"
+    floatLabel="never">
+    <div class="phone-wrap">
+      <div class="country-flag">
+        <select [(ngModel)]="selectedCountry"
+          [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let country of countries"
+            [value]="country.code">{{country.code}}&nbsp;&nbsp;{{country.emoji}}</option>
+        </select>
+      </div>
+      <div class="country-code">
+        {{callingPrefix}}
+      </div>
+      <div class="phone">
+        <input formControlName="phone"
+          required
+          [appPhoneMask]="selectedCountry"
+          matInput
+          placeholder="Enter a phone number"
+          maxlength="20">
+      </div>
+    </div>
+
+    <mat-error *ngIf="userForm.controls['phone'].invalid">Please enter a valid phone
+      number</mat-error>
+  </mat-form-field>
+  <div class="buttons">
+    <button mat-flat-button
+      [disabled]="userForm.invalid"
+      color="primary"
+      type="submit">Add</button>
+    <button mat-flat-button
+      (click)="onCancelClick()"
+      color="accent"
+      type="button">Cancel</button>
+  </div>
+</form>

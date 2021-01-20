@@ -1,0 +1,131 @@
+<mat-card>
+  <button mat-flat-button
+    color="primary"
+    (click)="onAddUserClick()"
+    class="add-user">Add User</button>
+
+  <h1 *ngIf="!(users$ | async).length">No items found.</h1>
+  <table mat-table
+    *ngIf="(users$ | async).length"
+    [dataSource]="users$"
+    class="mat-elevation-z0">
+
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell
+        *matHeaderCellDef> Name </th>
+      <td mat-cell
+        *matCellDef="let element"
+        (click)="!isEditMode(element.id, 'name') ? onColClick(element.id, 'name') : null">
+        <ng-container *ngIf="!isEditMode(element.id, 'name')">
+          {{element.name}}
+        </ng-container>
+        <ng-container *ngIf="isEditMode(element.id, 'name')">
+          <mat-form-field floatLabel="never">
+            <input matInput
+              placeholder="Enter name"
+              required
+              [formControl]="getControl(element.id, 'name')">
+            <mat-error *ngIf="getControl(element.id, 'name').invalid">Enter a correct name
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell
+        *matHeaderCellDef> Email </th>
+      <td mat-cell
+        *matCellDef="let element"
+        (click)="!isEditMode(element.id, 'email') ? onColClick(element.id, 'email'):null">
+        <ng-container *ngIf="!isEditMode(element.id, 'email')">
+          {{element.email}}
+        </ng-container>
+        <ng-container *ngIf="isEditMode(element.id, 'email')">
+          <mat-form-field floatLabel="never">
+            <input matInput
+              placeholder="example@example.com"
+              required
+              [formControl]="getControl(element.id, 'email')">
+            <mat-error *ngIf="getControl(element.id, 'email').invalid">Enter a correct email
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell
+        *matHeaderCellDef> Phone </th>
+      <td mat-cell
+        *matCellDef="let element"
+        (click)="!isEditMode(element.id, 'phone') ?  onColClick(element.id, 'phone') : null">
+        <ng-container *ngIf="!isEditMode(element.id, 'phone')">
+          {{getCallingPrefix(element.countryCode)}} <span
+            [appPrettifyPhone]="element.countryCode">{{element.phone}}</span>
+        </ng-container>
+        <ng-container *ngIf="isEditMode(element.id, 'phone')">
+          <mat-form-field class="phone-input"
+            floatLabel="never">
+            <div class="phone-wrap">
+              <div class="country-flag">
+                <select [formControl]="getControl(element.id, 'countryCode')"
+                  (change)="onCountryChangeClick(element.id, getControl(element.id, 'countryCode'))">
+                  <option *ngFor="let country of countries"
+                    [value]="country.code">{{country.code}}&nbsp;&nbsp;{{country.emoji}}</option>
+                </select>
+              </div>
+              <div class="country-code">
+                {{getCallingPrefix(element.countryCode)}}
+              </div>
+              <div class="phone">
+                <input [formControl]="getControl(element.id, 'phone')"
+                  required
+                  [appPhoneMask]="element.countryCode"
+                  matInput
+                  placeholder="Enter a phone number"
+                  maxlength="20">
+              </div>
+            </div>
+            <mat-error *ngIf="getControl(element.id, 'phone').invalid">Enter a correct phone
+            </mat-error>
+          </mat-form-field>
+
+        </ng-container>
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell
+        *matHeaderCellDef> Actions </th>
+      <td mat-cell
+        *matCellDef="let element">
+        <mat-icon class="delete"
+          aria-hidden="false"
+          (click)="onDeleteClick(element.id)"
+          aria-label="Delete"
+          color="accent">delete</mat-icon>
+        <mat-icon aria-hidden="false"
+          *ngIf="isRowInEditMode(element.id)"
+          (click)="onCancelEditClick(element.id)"
+          aria-label="Cancel editing"
+          color="accent">clear</mat-icon>
+        <mat-icon aria-hidden="false"
+          *ngIf="isRowInEditMode(element.id)"
+          [class.disabled]="isEditModeDisabled(element.id)"
+          (click)="onFinishEditClick(element.id)"
+          aria-label="Finish editing"
+          color="accent">check_circle</mat-icon>
+
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row
+      *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+      *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-card>

@@ -1,0 +1,33 @@
+.phone-wrap {
+  display: flex;
+  flex-flow: row nowrap;
+  select {
+    border: 0;
+    background: transparent;
+  }
+  select:focus {
+    outline: none;
+  }
+  .country-flag {
+    box-sizing: border-box;
+    width: 5rem;
+  }
+  .country-code {
+    width: 2rem;
+    display: flex;
+    padding-right: 8px;
+    justify-content: flex-end;
+    box-sizing: border-box;
+  }
+}
+mat-form-field {
+  width: 100%;
+}
+.buttons {
+  width: 100%;
+  margin-top: 20px;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
